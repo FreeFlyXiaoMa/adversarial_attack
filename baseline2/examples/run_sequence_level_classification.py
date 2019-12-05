@@ -312,7 +312,7 @@ def main():
                         type=int,
                         help="Total batch size for training.")
     parser.add_argument("--eval_batch_size",
-                        default=8,
+                        default=32,
                         type=int,
                         help="Total batch size for eval.")
     parser.add_argument("--learning_rate",
@@ -320,7 +320,7 @@ def main():
                         type=float,
                         help="The initial learning rate for Adam.")
     parser.add_argument("--num_train_epochs",
-                        default=1.0,
+                        default=3.0,
                         type=float,
                         help="Total number of training epochs to perform.")
     parser.add_argument("--warmup_proportion",
@@ -430,7 +430,7 @@ def main():
 
     if args.do_train:
         train(args, model, tokenizer, ngram_dict, processor, label_list)
-    if args.do_eval and (args.local_rank == -1 or torch.distributed.get_rank() == 0):
+    if args.do_eval :
         result = evaluate(args, model, tokenizer, ngram_dict, processor, label_list)
         for key in sorted(result.keys()):
             logger.info("  %s = %s", key, str(result[key]))
