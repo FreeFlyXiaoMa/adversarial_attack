@@ -48,7 +48,7 @@ ALL_MODELS = sum((tuple(conf.pretrained_config_archive_map.keys()) for conf in (
 
 logger = logging.getLogger(__name__)
 
-
+# logging.getLogger(__name__)
 class InputExample(object):
     """A single training/test example for simple sequence classification."""
 
@@ -187,7 +187,7 @@ def _truncate_seq_pair(tokens_a, tokens_b, max_length):
 
 def accuracy(out, labels):
     outputs = np.argmax(out, axis=1)
-    return f1_score(labels,outputs,labels=[0,1,2],average='macro')
+    return f1_score(labels,outputs,labels=['0','1'],average='macro')
 
 def select_field(features, field):
     return [
@@ -583,8 +583,8 @@ def main():
                 df=pd.read_csv(os.path.join(args.data_dir, file))
                 df['label_0']=logits[:,0]
                 df['label_1']=logits[:,1]
-                df['label_2']=logits[:,2]
-                df[['id','label_0','label_1','label_2']].to_csv(os.path.join(args.output_dir, "sub.csv"),index=False)
+                # df['label_2']=logits[:,2]
+                df[['id','label_0','label_1']].to_csv(os.path.join(args.output_dir, "sub.csv"),index=False)
             
 if __name__ == "__main__":
     main()

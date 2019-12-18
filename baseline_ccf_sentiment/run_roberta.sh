@@ -1,5 +1,5 @@
 export CUDA_VISIBLE_DEVICES=0,1
-for((i=0;i<5;i++));  
+for((i=0;i<1;i++));
 do   
 
 /E/home/mayajun/.conda/envs/mayajun_env/bin/python run_bert.py \
@@ -15,7 +15,7 @@ do
 --lstm_hidden_size 512 \
 --lstm_layers 1 \
 --lstm_dropout 0.1 \
---eval_steps 200 \
+--eval_steps 1000 \
 --per_gpu_train_batch_size 2 \
 --gradient_accumulation_steps 1 \
 --warmup_steps 0 \
